@@ -34,6 +34,10 @@ public class User implements Client{
 	public void tweet(String tweet) {
 		newsFeed.addElement(tweet);
 	}
+
+	public void accept(Visitor visitor) {
+		visitor.visitUser(this);
+	}
 	 
 	
 }

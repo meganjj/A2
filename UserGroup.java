@@ -22,5 +22,9 @@ public class UserGroup implements Client {
 	public void addUsers(Client newUser) {
 		users.add(newUser);
 	}
+
+	public void accept(Visitor visitor) {
+		visitor.visitGroup(this);
+	}
 	
 }
