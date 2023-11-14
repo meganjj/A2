@@ -6,6 +6,8 @@ import java.awt.*;
 
 public class AdminPanel {
 
+	private static AdminPanel instance = null;
+
 	public AdminPanel() {
 		JFrame frame = new JFrame("MiniTwitter");
 		frame.setSize(800, 600);
@@ -59,4 +61,16 @@ public class AdminPanel {
 		frame.add(left);
 		frame.add(right);
 	}
+
+	public static AdminPanel getInstance() {
+		if (instance == null ) {
+			synchronized (AdminPanel.class) {
+				if (instance == null) {
+					instance = new AdminPanel();
+				}
+			}
+		}
+		return instance;
+	}
+
 }
