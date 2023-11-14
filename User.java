@@ -63,6 +63,10 @@ public class User implements Client, Follower, Subject {
 	public void update(String tweet) {
 		newsFeed.addElement(tweet);
 	}
+
+	public String toString() {
+		return this.getId();
+	}
 	 
 	
 }
