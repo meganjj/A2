@@ -1,6 +1,6 @@
 import javax.swing.DefaultListModel;
 
-public class User implements Client{
+public class User implements Client, Follower, Subject {
 
 	private String id;
 	private DefaultListModel<User> followings = new DefaultListModel<>();
@@ -37,6 +37,31 @@ public class User implements Client{
 
 	public void accept(Visitor visitor) {
 		visitor.visitUser(this);
+	}
+
+	@Override
+	public void follow(User follower) {
+		followings.addElement(follower);
+	}
+
+	@Override
+	public void unregisterObserver(User follower) {
+		followings.removeElement(followings.indexOf(follower));
+	}
+
+	@Override
+	public void notifyObservers(String tweet) {
+		for (int i = 0; i < followings.size(); i++)
+        	{
+            		User follower = followings.get(i);
+			System.out.println(follower);
+           	 	follower.update(tweet);
+		}
+	}
+
+	@Override
+	public void update(String tweet) {
+		newsFeed.addElement(tweet);
 	}
 	 
 	

@@ -18,10 +18,20 @@ public class UserView {
 
 		follow.addActionListener(ae -> {
 			String id = userId.getText();
+			//GetUser finds if a user exists
+			//User userToFollow = 
+			if (userToFollow == null) {
+				JOptionPane.showMessageDialog(userViewArea, "User does not exist!");
+			}
+			else {
+				user.follow(userToFollow);
+			}
 		});
 
 		post.addActionListener(ae -> {
 			String message = tweet.getText();
+			user.tweet(message);
+			user.notifyObservers(message);
 		});
 
 		userViewArea.add(username);
