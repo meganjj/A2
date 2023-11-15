@@ -78,7 +78,6 @@ public class AdminPanel {
 			}
 			UserGroup newGroup = new UserGroup(groupId.getText());
 			DefaultMutableTreeNode newGroupInput = new DefaultMutableTreeNode(newGroup);
-			System.out.println(root.containsGroup(groupId.getText()) + " " + groupId.getText());
 			if (selectedUser.getUserObject() instanceof User) {
 				JOptionPane.showMessageDialog(frame, "Cannot add group to user!");
 			} else if (root.containsGroup(groupId.getText())) {

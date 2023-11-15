@@ -57,12 +57,13 @@ public class UserGroup implements Client {
 			if (accounts instanceof User) {
 				if (accounts.getId().equals(userId)) {
 					return true;
-				} else if (accounts instanceof UserGroup) {
-					if (((UserGroup)accounts).containsUser(userId)) {
-						return true;
-					}
+				} 
+			} else if (accounts instanceof UserGroup) {
+				if (((UserGroup)accounts).containsUser(userId)) {
+					return true;
 				}
 			}
+			
 		}
 		return false;
 	}
