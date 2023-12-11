@@ -18,10 +18,7 @@ public class UserView {
 		JButton post = new JButton("Post Tweet");
 		JList followerList = new JList<>(user.getFollowings());
 		JList newsFeed = new JList<>(user.getNewsFeed());
-
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");    
-		Date resultdate = new Date(user.getLastUpdate());
-		JLabel lastUpdateTime = new JLabel("Last update: " + sdf.format(resultdate));
+		JLabel creationTime = new JLabel("Created: " + user.getTimeStamp(user.getCreationTime()));
 		
 
 		follow.addActionListener(ae -> {
@@ -81,7 +78,7 @@ public class UserView {
 
 		c.gridx = 0;
 		c.gridy = 4;
-		userViewArea.add(lastUpdateTime, c);
+		userViewArea.add(creationTime, c);
 
 		userViewArea.setLocationRelativeTo(frame);
 		userViewArea.setVisible(true);

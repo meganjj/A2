@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.DefaultListModel;
 
 public class User implements Client, Follower, Subject {
@@ -30,6 +33,13 @@ public class User implements Client, Follower, Subject {
 		return lastUpdateTime;
 	}
 
+	public String getTimeStamp(long time) {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");    
+		Date resultdate = new Date(time);
+		return sdf.format(resultdate);
+
+	}
+
 	public DefaultListModel<User> getFollowings() {
 		return followings;
 	}
@@ -45,6 +55,7 @@ public class User implements Client, Follower, Subject {
 	public void tweet(String tweet) {
 		newsFeed.addElement(tweet);
 		lastUpdateTime = System.currentTimeMillis();
+		newsFeed.addElement("Last updated: " + getTimeStamp(lastUpdateTime));
 	}
 
 	public void accept(Visitor visitor) {
