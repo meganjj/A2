@@ -3,12 +3,15 @@ import javax.swing.DefaultListModel;
 public class User implements Client, Follower, Subject {
 
 	private String id;
+	private long creationTime;
+	private long lastUpdateTime;
 	private DefaultListModel<User> followings = new DefaultListModel<>();
 	private DefaultListModel<String> myTweets = new DefaultListModel<>();
 	private DefaultListModel<String> newsFeed = new DefaultListModel<>();
 
 	public User(String id) {
 		this.id = id;
+		this.creationTime = System.currentTimeMillis();
 		followings = new DefaultListModel<>();
 		myTweets = new DefaultListModel<>();
 		newsFeed = new DefaultListModel<>();
@@ -17,6 +20,14 @@ public class User implements Client, Follower, Subject {
 	@Override
 	public String getId() {
 		return id;
+	}
+
+	public Long getCreationTime() {
+		return creationTime;
+	}
+
+	public Long getLastUpdate() {
+		return lastUpdateTime;
 	}
 
 	public DefaultListModel<User> getFollowings() {
@@ -33,6 +44,7 @@ public class User implements Client, Follower, Subject {
 
 	public void tweet(String tweet) {
 		newsFeed.addElement(tweet);
+		lastUpdateTime = System.currentTimeMillis();
 	}
 
 	public void accept(Visitor visitor) {
@@ -57,6 +69,7 @@ public class User implements Client, Follower, Subject {
 			System.out.println(follower);
            	 	follower.update(tweet);
 		}
+		lastUpdateTime = System.currentTimeMillis();
 	}
 
 	@Override

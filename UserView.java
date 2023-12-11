@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UserView {
 	
@@ -16,6 +18,10 @@ public class UserView {
 		JButton post = new JButton("Post Tweet");
 		JList followerList = new JList<>(user.getFollowings());
 		JList newsFeed = new JList<>(user.getNewsFeed());
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");    
+		Date resultdate = new Date(user.getLastUpdate());
+		JLabel lastUpdateTime = new JLabel("Last update: " + sdf.format(resultdate));
 		
 
 		follow.addActionListener(ae -> {
@@ -73,9 +79,9 @@ public class UserView {
 		c.gridwidth = 2;
 		userViewArea.add(newsFeed, c);
 
-
-
-
+		c.gridx = 0;
+		c.gridy = 4;
+		userViewArea.add(lastUpdateTime, c);
 
 		userViewArea.setLocationRelativeTo(frame);
 		userViewArea.setVisible(true);
