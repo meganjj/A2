@@ -3,16 +3,26 @@ import java.util.ArrayList;
 public class UserGroup implements Client {
 
 	private String id;
+	private long creationTime;
 	private ArrayList<Client> users;
 
 	public UserGroup(String id) {
 		this.id = id;
+		this.creationTime = System.currentTimeMillis();
 		users = new ArrayList<>();
 	}
 
 	@Override
 	public String getId() {
 		return id;
+	}
+
+	public Long getCreationTime() {
+		return creationTime;
+	}
+
+	public void setCreationTime() {
+		creationTime = System.currentTimeMillis();
 	}
 
 	public ArrayList<Client> getUsers() {

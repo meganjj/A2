@@ -23,6 +23,8 @@ public class AdminPanel {
 		JButton groupTotal = new JButton("Show Group Total");
 		JButton msgsTotal = new JButton("Show Message Total");
 		JButton positivePercent = new JButton("Show Positive Percentage");
+		JButton validateId = new JButton("Check IDs");
+		JButton latestUser = new JButton("Last updated user");
 		JTextArea userId = new JTextArea();
 		JTextArea groupId = new JTextArea();
 
@@ -123,6 +125,24 @@ public class AdminPanel {
 			JOptionPane.showMessageDialog(frame, "Percentage of Positive Tweets: " + posVis.getPositivePercentage(), "Positive Percentage", 0);
 		});
 
+		validateId.addActionListener(ae -> {
+			String newUser = userId.getText();
+			String newGroup = groupId.getText();
+			if (root.containsUser(newUser) || root.containsGroup(newGroup) ) {
+				JOptionPane.showMessageDialog(frame, "Cannot have duplicate users or groups!");
+			} else if (newUser.contains(" ") || newGroup.contains(" ")) {
+				JOptionPane.showMessageDialog(frame, "IDs cannot contain spaces!");
+			} else if (!root.containsUser(newUser) || !root.containsGroup(newGroup)) {
+				JOptionPane.showMessageDialog(frame, "Valid ID!");
+			}
+		});
+
+		latestUser.addActionListener(ae -> {
+			LastUpdateTimeVisitor latestVisitor = new LastUpdateTimeVisitor();
+			root.accept(latestVisitor);
+			JOptionPane.showMessageDialog(frame, "Last updated user: " + latestVisitor.getLatestUser());
+		});
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL; 
 
@@ -180,6 +200,8 @@ public class AdminPanel {
 		bottom.add(groupTotal);
 		bottom.add(msgsTotal);
 		bottom.add(positivePercent);
+		bottom.add(validateId);
+		bottom.add(latestUser);
 
 		right.add(top);
 		right.add(bottom);
